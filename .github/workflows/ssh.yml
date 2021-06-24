@@ -15,4 +15,4 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd @work/$PROJECT_DIR
-          pwd
+          ls -al
