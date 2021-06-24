@@ -13,9 +13,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
-        run: |
-          cd @work/$PROJECT_DIR
-          ls -al
         script: |
-          cd @work/$PROJECT_DIR
+          cd @work/${{ env.PROJECT_DIR }}
           ls -al
