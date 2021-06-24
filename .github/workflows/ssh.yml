@@ -14,5 +14,5 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          whoami
-          ls -al
+          cd @work/%PROJECT_DIR%
+          pwd
