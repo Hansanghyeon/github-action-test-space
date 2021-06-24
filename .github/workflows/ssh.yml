@@ -15,4 +15,4 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          echo ${process.env.PROJECT_DIR}
+          echo ${{ PROJECT_DIR }}
