@@ -14,5 +14,5 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd @work/${{ env.PROJECT_DIR }}
+          cd @work/${{ secrets.PROJECT_DIR }}
           ls -al
