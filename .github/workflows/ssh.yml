@@ -1,7 +1,7 @@
 name: remote ssh command
 on: [push]
 env:
-  PROJECT_DIR: 202106__bp-online-training
+  PROJECT_DIR: ${{ secrets.PROJECT_DIR }}
 jobs:
   build:
     name: Build
