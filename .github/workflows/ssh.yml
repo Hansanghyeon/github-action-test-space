@@ -18,7 +18,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  asset-upload:
+  asset:
     name: 🚚 Asset download and host upload
     runs-on: ubuntu-latest
     steps:
@@ -46,7 +46,7 @@ jobs:
           REMOTE_PORT: ${{ secrets.PORT }}
           TARGET: "/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
 
-  git-pull:
+  source:
     name: 📮 update source Github 'git pull'
     runs-on: ubuntu-latest
     steps:
