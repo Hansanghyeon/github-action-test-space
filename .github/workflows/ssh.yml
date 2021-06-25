@@ -34,13 +34,15 @@ jobs:
 
     - name: dir test
       run: ls -al
-      
-    - name: Prepare SSH to work with the remote server
-      run: |
-        cd ~ && mkdir .ssh &&
-        touch ~/.ssh/known_hosts &&
-        echo "${{ secrets.SSH_HOSTKEY }}" > ~/.ssh/known_hosts
-    
+
+    - name: Prepare SSH
+      run: >
+          cd ~ && mkdir .ssh &&
+          touch ~/.ssh/known_hosts &&
+          ssh-keyscan -H "$IP" >>~/.ssh/known_hosts
+      env:
+          IP: ${{ secrets.HOST }}
+
     - name: 📂 Sync files to Server
       uses: easingthemes/ssh-deploy@main
       env:
@@ -51,7 +53,6 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           REMOTE_PORT: ${{ secrets.PORT }}
           TARGET: "/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
-          EXCLUDE: "/dist/, /node_modules/"
 
   git-pull:
     name: 📮 update source Github 'git pull'
