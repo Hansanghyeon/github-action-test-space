@@ -1,7 +1,7 @@
 name: remote ssh command
-on:
-  release:
-    types: [created]
+on: [push]
+#   release:
+#     types: [created]
 
 jobs:
   Explore-GitHub-Actions:
