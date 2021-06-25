@@ -57,3 +57,17 @@ jobs:
         script: |
           cd ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}
           ls -al
+          echo ${{ steps.get_release.outputs.upload_url }}
+
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: 📂 Sync files
+      uses: wlixcc/SFTP-Deploy-Action@v1.0
+      with:
+        username: ${{ secrets.USERNAME }}
+        server: ${{ secrets.HOST }}
+        ssh_private_key: ${{ secrets.KEY }} 
+        local_path: './static/*'
+        remote_path: '/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test'
+        args: '-o ConnectTimeout=5'
