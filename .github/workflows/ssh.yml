@@ -31,6 +31,21 @@ jobs:
         file: "plague-linux.zip"
         target: "subdir/plague-linux.zip"
         token: ${{ secrets.TOKEN }}
+        script: |
+          ls -al
+
+    # - name: Setup SSH Keys and known_hosts
+    #   env:
+    #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+    #   run: |
+    #     TMP_SOCK=$(mktemp)
+    #     echo "SSH_AUTH_SOCK=$TMP_SOCK" >> $GITHUB_ENV
+    #     ssh-agent -a $TMP_SOCK > /dev/null
+    #     ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+    #     echo "::add-mask::$TMP_SOCK"
+
+    # - name: Copy to My Server
+    #   run: rsync AppData/data/iot-config/plug/application.img ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/data
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
@@ -42,4 +57,3 @@ jobs:
         script: |
           cd ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}
           ls -al
-          echo ${{ steps.get_release.outputs.upload_url }}
