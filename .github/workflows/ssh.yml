@@ -2,6 +2,7 @@ name: remote ssh command
 on:
   release:
     types: [created]
+
 jobs:
   build:
     name: Build
