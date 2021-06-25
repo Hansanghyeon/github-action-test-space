@@ -13,7 +13,7 @@ jobs:
       id: get_release
       uses: bruceadams/get-release@v1.2.2
       env:
-        GITHUB_TOKEN: ${{ secrests.TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
