@@ -1,7 +1,7 @@
 name: remote ssh command
-on:
-  release:
-    types: [created]
+on: [push]
+#   release:
+#     types: [created]
 
 jobs:
   Explore-GitHub-Actions:
@@ -23,7 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Get release
+    # - name: Get release
+    - name: 🚚 Get latest code
       uses: dsaltares/fetch-gh-release-asset@master
       with:
         repo: "dsaltares/godot-wild-jam-18"
@@ -33,19 +34,6 @@ jobs:
         token: ${{ secrets.TOKEN }}
         script: |
           ls -al
-
-    # - name: Setup SSH Keys and known_hosts
-    #   env:
-    #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-    #   run: |
-    #     TMP_SOCK=$(mktemp)
-    #     echo "SSH_AUTH_SOCK=$TMP_SOCK" >> $GITHUB_ENV
-    #     ssh-agent -a $TMP_SOCK > /dev/null
-    #     ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
-    #     echo "::add-mask::$TMP_SOCK"
-
-    # - name: Copy to My Server
-    #   run: rsync AppData/data/iot-config/plug/application.img ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/data
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
@@ -57,10 +45,6 @@ jobs:
         script: |
           cd ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}
           ls -al
-          echo ${{ steps.get_release.outputs.upload_url }}
-
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
     
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.0
@@ -68,6 +52,6 @@ jobs:
         username: ${{ secrets.USERNAME }}
         server: ${{ secrets.HOST }}
         ssh_private_key: ${{ secrets.KEY }} 
-        local_path: './static/*'
+        local_path: './subdir/*'
         remote_path: '/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test'
         args: '-o ConnectTimeout=5'
