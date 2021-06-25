@@ -13,6 +13,6 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd ${{ secrets.PROJECT_DIR }}
+          cd ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}
           ls -al
           echo "${{ secrets.KEY }}" > test.txt
