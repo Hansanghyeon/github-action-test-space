@@ -19,7 +19,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
   asset-upload:
-    name: Build
+    name: 🚚 Asset download and host upload
     runs-on: ubuntu-latest
     steps:
     # - name: Get release
@@ -37,8 +37,8 @@ jobs:
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.0
       with:
-        username: ${{ secrets.USERNAME }}
-        server: ${{ secrets.HOST }}
+        username: '${{ secrets.USERNAME }}'
+        server: '${{ secrets.HOST }}'
         port: ${{ secrets.PORT }}
         ssh_private_key: ${{ secrets.KEY }}
         local_path: './subdir/*'
@@ -46,7 +46,7 @@ jobs:
         args: '-o ConnectTimeout=5'
 
   git-pull:
-    name: Build
+    name: 📮 update source Github 'git pull'
     runs-on: ubuntu-latest
     steps:
 
