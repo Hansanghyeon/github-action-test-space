@@ -8,14 +8,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
 
     - name: Get release
       id: get_release
       uses: bruceadams/get-release@v1.2.2
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ secrests.TOKEN }}
 
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
@@ -25,6 +23,6 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd ${{ secrets.PROJECT_DIR }}
+          cd ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}
           ls -al
           echo ${{ steps.get_release.outputs.upload_url }}
