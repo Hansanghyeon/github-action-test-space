@@ -33,8 +33,7 @@ jobs:
         token: ${{ secrets.TOKEN }}
 
     - name: dir test
-      with:
-        script: ls -al
+      run: ls -al
     
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.0
