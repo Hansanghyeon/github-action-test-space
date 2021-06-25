@@ -43,6 +43,7 @@ jobs:
           SOURCE: "subdir/"
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
+          REMOTE_PORT: ${{ secrets.PORT }}
           TARGET: "/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
           EXCLUDE: "/dist/, /node_modules/"
 
