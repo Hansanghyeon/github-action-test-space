@@ -36,13 +36,13 @@ jobs:
       run: ls -al
     
     - name: 📂 Sync files
-      uses: wlixcc/SFTP-Deploy-Action@v1.0
-      with:
+      uses: wlixcc/SFTP-Deploy-Action@v1.0 
+      with:  
         username: '${{ secrets.USERNAME }}'
         server: '${{ secrets.HOST }}'
         port: ${{ secrets.PORT }}
         ssh_private_key: ${{ secrets.KEY }}
-        local_path: './subdir/*'
+        local_path: './subdir/*'  # 对应我们项目build的文件夹路径
         remote_path: '/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test'
         args: '-o ConnectTimeout=5'
 
