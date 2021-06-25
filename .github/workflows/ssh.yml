@@ -31,8 +31,10 @@ jobs:
         file: "plague-linux.zip"
         target: "subdir/plague-linux.zip"
         token: ${{ secrets.TOKEN }}
-        script: |
-          ls -al
+
+    - name: dir test
+      with:
+        script: ls -al
     
     - name: 📂 Sync files
       uses: wlixcc/SFTP-Deploy-Action@v1.0
