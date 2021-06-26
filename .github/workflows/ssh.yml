@@ -44,7 +44,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.HOST }}
           REMOTE_USER: ${{ secrets.USERNAME }}
           REMOTE_PORT: ${{ secrets.RSYNC_PORT }}
-          TARGET: "/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
+          TARGET: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
 
   source:
     name: 📮 update source Github 'git pull'
