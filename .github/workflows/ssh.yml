@@ -41,7 +41,7 @@ jobs:
           touch ~/.ssh/known_hosts &&
           ssh-keyscan -H "$IP" >>~/.ssh/known_hosts
       env:
-          IP: ${{ secrets.DEPLOY_HOST }}
+          IP: ${{ secrets.HOST }}
           
     - name: 📂 Sync files to Server
       uses: easingthemes/ssh-deploy@main
