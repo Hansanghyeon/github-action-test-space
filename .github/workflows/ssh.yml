@@ -45,6 +45,18 @@ jobs:
           REMOTE_USER: ${{ secrets.USERNAME }}
           REMOTE_PORT: ${{ secrets.RSYNC_PORT }}
           TARGET: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
+    
+    - name: 📂 Sync files to Server2
+      uses: AEnterprise/rsync-deploy@v1.0
+      env:
+        DEPLOY_KEY: ${{ secrets.KEY }}
+        SERVER_PORT: ${{ secrets.RSYNC_PORT }}
+        ARGS: "-rltgoDzvO --delete"
+        FOLDER: "subdir/"
+        SERVER_IP: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
+
 
   source:
     name: 📮 update source Github 'git pull'
