@@ -8,7 +8,7 @@ jobs:
     name: 🚚 Asset download and host upload
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
+    - name: 🚚 Get release deploy-src code or file, img, etc...
       uses: dsaltares/fetch-gh-release-asset@master
       with:
         repo: "${{ github.repository }}"
@@ -17,9 +17,10 @@ jobs:
         target: "deploy-src.tar"
         token: ${{ secrets.TOKEN }}
         
-    - name: 🗳 Unzip
+    - name: 🗳 Create @sync folder and tar Unzip
       run: |
-        tar xvf deploy-src.tar
+        mkdir @sync
+        tar xvf deploy-src.tar -C ./@sync
         rm deploy-src.tar
         ls -al
     
