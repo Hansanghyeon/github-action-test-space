@@ -1,28 +1,9 @@
 name: remote ssh command
-# on: [push]
-#   release:
-#     types: [created]
-# 릴리즈 테스트
 on:
   release:
     types: [published]
 
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - run: echo "해당 깃헙 릴리즈 태그 아이디 ${{ github.event.release.tag_name }}"
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
   asset:
     name: 🚚 Asset download and host upload
     runs-on: ubuntu-latest
@@ -35,11 +16,8 @@ jobs:
         file: "assets.zip"
         target: "assets.zip"
         token: ${{ secrets.TOKEN }}
-
-    - name: dir test
-      run: ls -al
     
-    - name: 📂 Sync files to Server2
+    - name: 📂 Sync files to Server
       uses: AEnterprise/rsync-deploy@v1.0
       env:
         DEPLOY_KEY: ${{ secrets.KEY }}
@@ -48,7 +26,7 @@ jobs:
         ARGS: "-rltgoDzvO --delete"
         SERVER_IP: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
-        SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
+        SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/github_action_upload"
 
   source:
     name: 📮 update source Github 'git pull'
@@ -64,4 +42,5 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}
-          ls -al
+          git stash
+          git pull origin develop
