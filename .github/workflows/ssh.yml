@@ -22,14 +22,13 @@ jobs:
         mkdir @sync
         tar xvf deploy-src.tar -C ./@sync
         rm deploy-src.tar
-        ls -al
     
     - name: 📂 Sync files to Server
       uses: AEnterprise/rsync-deploy@v1.0
       env:
         DEPLOY_KEY: ${{ secrets.KEY }}
         SERVER_PORT: ${{ secrets.RSYNC_PORT }}
-        FOLDER: "./@sync"
+        FOLDER: "./@sync/"
         ARGS: "-rltgoDzvO --ignore-times"
         SERVER_IP: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
