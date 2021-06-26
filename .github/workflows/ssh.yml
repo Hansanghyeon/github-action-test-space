@@ -13,8 +13,8 @@ jobs:
       with:
         repo: "${{ github.repository }}"
         version: "tags/${{ github.event.release.tag_name }}"
-        file: "assets.zip"
-        target: "assets.zip"
+        file: "deploy-src.tar"
+        target: "deploy-src.tar"
         token: ${{ secrets.TOKEN }}
     
     - name: 📂 Sync files to Server
@@ -26,7 +26,7 @@ jobs:
         ARGS: "-rltgoDzvO --delete"
         SERVER_IP: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
-        SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/github_action_upload"
+        SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}"
 
   source:
     name: 📮 update source Github 'git pull'
@@ -42,5 +42,4 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}
-          git stash
-          git pull origin develop
+          ls -al
