@@ -27,15 +27,14 @@ jobs:
     name: 🚚 Asset download and host upload
     runs-on: ubuntu-latest
     steps:
-    # - name: Get release
-#     - name: 🚚 Get latest code
-#       uses: dsaltares/fetch-gh-release-asset@master
-#       with:
-#         repo: "${{ github.repository }}"
-#         version: "tags/v0.1.18"
-#         file: "assets.zip"
-#         target: "subdir/plague-linux.zip"
-#         token: ${{ secrets.TOKEN }}
+    - name: 🚚 Get latest code
+      uses: dsaltares/fetch-gh-release-asset@master
+      with:
+        repo: "${{ github.repository }}"
+        version: "tags/${{ github.event.release.tag_name }}"
+        file: "assets.zip"
+        target: "assets.zip"
+        token: ${{ secrets.TOKEN }}
 
     - name: dir test
       run: ls -al
@@ -46,7 +45,6 @@ jobs:
         DEPLOY_KEY: ${{ secrets.KEY }}
         SERVER_PORT: ${{ secrets.RSYNC_PORT }}
         ARGS: "-rltgoDzvO --delete"
-        FOLDER: "subdir/"
         SERVER_IP: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}/test"
