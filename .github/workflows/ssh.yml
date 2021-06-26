@@ -16,13 +16,19 @@ jobs:
         file: "deploy-src.tar"
         target: "deploy-src.tar"
         token: ${{ secrets.TOKEN }}
+        
+    - name: 🗳 Unzip
+      run: |
+        tar xvf deploy-src.tar
+        rm deploy-src.tar
+        ls -al
     
     - name: 📂 Sync files to Server
       uses: AEnterprise/rsync-deploy@v1.0
       env:
         DEPLOY_KEY: ${{ secrets.KEY }}
         SERVER_PORT: ${{ secrets.RSYNC_PORT }}
-        FOLDER: "./"
+        FOLDER: "./@sync"
         ARGS: "-rltgoDzvO --ignore-times"
         SERVER_IP: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
