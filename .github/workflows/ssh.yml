@@ -23,7 +23,7 @@ jobs:
         DEPLOY_KEY: ${{ secrets.KEY }}
         SERVER_PORT: ${{ secrets.RSYNC_PORT }}
         FOLDER: "./"
-        ARGS: "-rltgoDzvO --delete"
+        ARGS: "-rltgoDzvO --ignore-times"
         SERVER_IP: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
         SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}"
