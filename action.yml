@@ -21,6 +21,30 @@ inputs:
   token:
     description: 'The GitHub token. Typically this will be secrets.GITHUB_TOKEN'
     required: true
+  # https://github.com/AEnterprise/rsync-deploy/blob/master/Dockerfile
+  # 해당 참고
+  DEPLOY_KEY:
+    description: 'rsync ssh로 접속하기위한 ssh key'
+    required: true
+  SERVER_PORT:
+    description: 'rsync port'
+    require: true
+  FOLDER:
+    description: '연동할 폴더'
+    require: true
+    default: './'
+  ARGS:
+    description: 'rsync 추가 옵션'
+    require: false
+  SERVER_IP:
+    description: 'rsync할 호스트 IP or Domain'
+    require: true
+  USERNAME:
+    description: '호스트 접속 username'
+    require: true
+  SERVER_DESTINATION:
+    description: '호스트 rsync할 폴더'
+    require: true
 
 runs:
   using: 'docker'
@@ -31,6 +55,12 @@ runs:
     - ${{ inputs.file }}
     - ${{ inputs.target }}
     - ${{ inputs.token }}
+    - ${{ inputs.DEPLOY_KEY }}
+    - ${{ inputs.SERVER_PORT }}
+    - ${{ inputs.FOLDER }}
+    - ${{ inputs.SERVER_IP }}
+    - ${{ inputs.USERNAME }}
+    - ${{ inputs.SERVER_DESTINATION }}
 
 outputs:
   version:
