@@ -27,8 +27,3 @@ runs:
   steps:
     - run: echo Hello World.
       shell: bash
-runs:
-  using: "composite"
-  steps:
-    - run: echo Hello World.
-      shell: bash
