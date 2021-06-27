@@ -18,13 +18,13 @@ jobs:
         file: "deploy-src.tar"
         target: "deploy-src.tar"
         token: ${{ secrets.TOKEN }}
-        DEPLOY_KEY: ${{ secrets.KEY }}
-        SERVER_PORT: ${{ secrets.RSYNC_PORT }}
-        FOLDER: "./@sync/"
-        ARGS: "-rltgoDzvO --ignore-times"
-        SERVER_IP: ${{ secrets.HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}"
+        deploy_keyDEPLOY_KEY: ${{ secrets.KEY }}
+        server_portSERVER_PORT: ${{ secrets.RSYNC_PORT }}
+        folder: "./@sync/"
+        args: "-rltgoDzvO --ignore-times"
+        server_ip: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        server_destination: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}"
     - name: 'test'
       run: |
         ls -al
