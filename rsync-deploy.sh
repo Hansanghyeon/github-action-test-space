@@ -1,4 +1,41 @@
 #!/bin/bash
+
+
+DEPLOY_KEY=$DEPLOY_KEY
+if ! [[ -z ${DEPLOY_KEY} ]]; then
+  DEPLOY_KEY=$DEPLOY_KEY
+fi
+
+USERNAME=$USERNAME
+if ! [[ -z ${USERNAME} ]]; then
+  USERNAME=$USERNAME
+fi
+
+SERVER_IP=$SERVER_IP
+if ! [[ -z ${SERVER_IP} ]]; then
+  SERVER_IP=$SERVER_IP
+fi
+
+SERVER_DESTINATION=$SERVER_DESTINATION
+if ! [[ -z ${SERVER_DESTINATION} ]]; then
+  SERVER_DESTINATION=$SERVER_DESTINATION
+fi
+
+ARGS=$ARGS
+if ! [[ -z ${ARGS} ]]; then
+  ARGS=$ARGS
+fi
+
+SERVER_PORT=$SERVER_PORT
+if ! [[ -z ${SERVER_PORT} ]]; then
+  SERVER_PORT=$SERVER_PORT
+fi
+
+FOLDER=$FOLDER
+if ! [[ -z ${FOLDER} ]]; then
+  FOLDER=$FOLDER
+fi
+
 set -eu
 
 SSHPATH="$HOME/.ssh"
