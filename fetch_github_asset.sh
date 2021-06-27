@@ -64,3 +64,7 @@ curl \
 echo "::set-output name=version::$TAG_VERSION"
 echo "::set-output name=name::$RELEASE_NAME"
 echo "::set-output name=body::$RELEASE_BODY"
+
+mkdir @sync
+tar xvf ${TARGET} -C ./@sync
+rm ${TARGET}
