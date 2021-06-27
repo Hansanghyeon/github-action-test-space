@@ -23,26 +23,26 @@ inputs:
     required: true
   # https://github.com/AEnterprise/rsync-deploy/blob/master/Dockerfile
   # 해당 참고
-  DEPLOY_KEY:
+  deploy_key:
     description: 'rsync ssh로 접속하기위한 ssh key'
     required: true
-  SERVER_PORT:
+  server_port:
     description: 'rsync port'
     require: true
-  FOLDER:
+  folder:
     description: '연동할 폴더'
     require: true
     default: './'
-  ARGS:
+  args:
     description: 'rsync 추가 옵션'
     require: false
-  SERVER_IP:
+  server_ip:
     description: 'rsync할 호스트 IP or Domain'
     require: true
-  USERNAME:
+  username:
     description: '호스트 접속 username'
     require: true
-  SERVER_DESTINATION:
+  server_destination:
     description: '호스트 rsync할 폴더'
     require: true
 
@@ -55,12 +55,12 @@ runs:
     - ${{ inputs.file }}
     - ${{ inputs.target }}
     - ${{ inputs.token }}
-    - ${{ inputs.DEPLOY_KEY }}
-    - ${{ inputs.SERVER_PORT }}
-    - ${{ inputs.FOLDER }}
-    - ${{ inputs.SERVER_IP }}
-    - ${{ inputs.USERNAME }}
-    - ${{ inputs.SERVER_DESTINATION }}
+    - ${{ inputs.deploy_key }}
+    - ${{ inputs.server_port }}
+    - ${{ inputs.folder }}
+    - ${{ inputs.server_ip }}
+    - ${{ inputs.username }}
+    - ${{ inputs.server_destination }}
 
 outputs:
   version:
