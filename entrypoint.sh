@@ -1,41 +1,5 @@
 #!/bin/bash
 
-
-DEPLOY_KEY=$INPUT_DEPLOY_KEY
-if ! [[ -z ${INPUT_DEPLOY_KEY} ]]; then
-  DEPLOY_KEY=$DEPLOY_KEY
-fi
-
-USERNAME=$INPUT_USERNAME
-if ! [[ -z ${INPUT_USERNAME} ]]; then
-  USERNAME=$INPUT_USERNAME
-fi
-
-SERVER_IP=$INPUT_SERVER_IP
-if ! [[ -z ${INPUT_SERVER_IP} ]]; then
-  SERVER_IP=$INPUT_SERVER_IP
-fi
-
-SERVER_DESTINATION=$INPUT_SERVER_DESTINATION
-if ! [[ -z ${INPUT_SERVER_DESTINATION} ]]; then
-  SERVER_DESTINATION=$INPUT_SERVER_DESTINATION
-fi
-
-ARGS=$INPUT_ARGS
-if ! [[ -z ${INPUT_ARGS} ]]; then
-  ARGS=$INPUT_ARGS
-fi
-
-SERVER_PORT=$INPUT_SERVER_PORT
-if ! [[ -z ${INPUT_SERVER_PORT} ]]; then
-  SERVER_PORT=$INPUT_SERVER_PORT
-fi
-
-FOLDER=$INPUT_FOLDER
-if ! [[ -z ${INPUT_FOLDER} ]]; then
-  FOLDER=$INPUT_FOLDER
-fi
-
 if [[ -z "$INPUT_FILE" ]]; then
   echo "Missing file input in the action"
   exit 1
@@ -101,9 +65,51 @@ echo "::set-output name=version::$TAG_VERSION"
 echo "::set-output name=name::$RELEASE_NAME"
 echo "::set-output name=body::$RELEASE_BODY"
 
+
+##################################################
+## Release 다운로드 받은 파일 압축 해제
+##################################################
 mkdir @sync
 tar xvf ${TARGET} -C ./@sync
 rm ${TARGET}
+
+##################################################
+## rsync
+##################################################
+DEPLOY_KEY=$INPUT_DEPLOY_KEY
+if ! [[ -z ${INPUT_DEPLOY_KEY} ]]; then
+  DEPLOY_KEY=$DEPLOY_KEY
+fi
+
+USERNAME=$INPUT_USERNAME
+if ! [[ -z ${INPUT_USERNAME} ]]; then
+  USERNAME=$INPUT_USERNAME
+fi
+
+SERVER_IP=$INPUT_SERVER_IP
+if ! [[ -z ${INPUT_SERVER_IP} ]]; then
+  SERVER_IP=$INPUT_SERVER_IP
+fi
+
+SERVER_DESTINATION=$INPUT_SERVER_DESTINATION
+if ! [[ -z ${INPUT_SERVER_DESTINATION} ]]; then
+  SERVER_DESTINATION=$INPUT_SERVER_DESTINATION
+fi
+
+ARGS=$INPUT_ARGS
+if ! [[ -z ${INPUT_ARGS} ]]; then
+  ARGS=$INPUT_ARGS
+fi
+
+SERVER_PORT=$INPUT_SERVER_PORT
+if ! [[ -z ${INPUT_SERVER_PORT} ]]; then
+  SERVER_PORT=$INPUT_SERVER_PORT
+fi
+
+FOLDER=$INPUT_FOLDER
+if ! [[ -z ${INPUT_FOLDER} ]]; then
+  FOLDER=$INPUT_FOLDER
+fi
 
 set -eu
 
