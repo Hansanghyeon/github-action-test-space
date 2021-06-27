@@ -1,5 +1,51 @@
-name: "hello world"
-description: "add actions"
-runs:
-  using: "docker"
-  image: Dockerfile
+name: remote ssh command
+on:
+  release:
+    types: [published]
+
+jobs:
+  asset:
+    name: 🚚 Asset download and host upload
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get release deploy-src code or file, img, etc...
+      uses: dsaltares/fetch-gh-release-asset@master
+      with:
+        repo: "${{ github.repository }}"
+        version: "tags/${{ github.event.release.tag_name }}"
+        file: "deploy-src.tar"
+        target: "deploy-src.tar"
+        token: ${{ secrets.TOKEN }}
+        
+    - name: 🗳 Create @sync folder and tar Unzip
+      run: |
+        mkdir @sync
+        tar xvf deploy-src.tar -C ./@sync
+        rm deploy-src.tar
+    
+    - name: 📂 Sync files to Server
+      uses: AEnterprise/rsync-deploy@v1.0
+      env:
+        DEPLOY_KEY: ${{ secrets.KEY }}
+        SERVER_PORT: ${{ secrets.RSYNC_PORT }}
+        FOLDER: "./@sync/"
+        ARGS: "-rltgoDzvO --ignore-times"
+        SERVER_IP: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        SERVER_DESTINATION: "/volume1/docker/${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}"
+
+  source:
+    name: 📮 update source Github 'git pull'
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd ${{ secrets.PROJECT_TYPE }}/${{ secrets.PROJECT_DIR }}
+          ls -al
