@@ -23,7 +23,19 @@ inputs:
     required: true
 
 runs:
-  using: "composite"
-  steps:
-    - run: echo Hello World.
-      shell: bash
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.repo }}
+    - ${{ inputs.version }}
+    - ${{ inputs.file }}
+    - ${{ inputs.target }}
+    - ${{ inputs.token }}
+
+outputs:
+  version:
+    description: 'The version of the release or tag'
+  name:
+    description: 'The name of the release'
+  body:
+    description: 'The body of the release'
