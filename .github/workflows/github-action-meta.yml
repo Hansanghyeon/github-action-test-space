@@ -20,7 +20,6 @@ jobs:
         token: ${{ secrets.TOKEN }}
         deploy_key: ${{ secrets.KEY }}
         server_port: ${{ secrets.RSYNC_PORT }}
-        folder: "./@sync/"
         args: "-rltgoDzvO --ignore-times"
         server_ip: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
