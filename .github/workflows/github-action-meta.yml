@@ -12,4 +12,9 @@ jobs:
     steps:
     - name: 'add actions test'
       uses: Hansanghyeon/github-action-test-space@main
-      id: test
+      with:
+        repo: "${{ github.repository }}"
+        version: "tags/v0.0.14"
+        file: "deploy-src.tar"
+        target: "deploy-src.tar"
+        token: ${{ secrets.TOKEN }}
