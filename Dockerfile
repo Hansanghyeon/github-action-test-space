@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 RUN apt update
-RUN apt -yq install rsync openssh-client install ca-certificates curl wget jq
+RUN apt -yq install rsync openssh-client ca-certificates curl wget jq
 
 # fetch-gh-release-asset
 ADD fetch_github_asset.sh /fetch_github_asset.sh
