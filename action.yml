@@ -32,7 +32,6 @@ inputs:
   folder:
     description: '연동할 폴더'
     require: true
-    default: './'
   args:
     description: 'rsync 추가 옵션'
     require: false
