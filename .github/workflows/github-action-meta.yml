@@ -18,8 +18,8 @@ jobs:
         file: "deploy-src.tar"
         target: "deploy-src.tar"
         token: ${{ secrets.TOKEN }}
-        deploy_keyDEPLOY_KEY: ${{ secrets.KEY }}
-        server_portSERVER_PORT: ${{ secrets.RSYNC_PORT }}
+        deploy_key: ${{ secrets.KEY }}
+        server_port: ${{ secrets.RSYNC_PORT }}
         folder: "./@sync/"
         args: "-rltgoDzvO --ignore-times"
         server_ip: ${{ secrets.HOST }}
